@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: redis                  # Name of Deployment
+  labels:
+    app: redis                 # Label for Redis Pods
+spec:
+  replicas: 1                  # Only 1 Redis Pod needed
+  selector:
+    matchLabels:
+      app: redis               # Matches Pods with "app=redis"
+  template:
+    metadata:
+      labels:
+        app: redis             # Pod label "app=redis"
+    spec:
+      containers:
+      - name: redis
+        image: redis:alpine    # Lightweight Redis image
+        ports:
+        - containerPort: 6379  # Redis listens on port 6379
+        

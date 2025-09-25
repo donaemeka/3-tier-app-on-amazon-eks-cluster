@@ -1,0 +1,21 @@
+apiVersion: apps/v1           
+kind: Deployment               
+metadata:
+  name: vote                  
+  labels:
+    app: vote                  # Label to identify this Deployment
+spec:
+  replicas: 2                  # Run 2 Pods for high availability
+  selector:
+    matchLabels:
+      app: vote                # Deployment manages Pods with label "app=vote"
+  template:                     # Pod template (blueprint for Pods)
+    metadata:
+      labels:
+        app: vote              # Each Pod created will have label "app=vote"
+    spec:
+      containers:              # Define container(s) inside the Pod
+      - name: vote             # Name of the container
+        image: donaemeka/voting-app-vote:latest  # Lab image for vote app
+        ports:
+        - containerPort: 80    # App inside the container listens on port 80

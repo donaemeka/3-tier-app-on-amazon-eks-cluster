@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: worker
+  labels:
+    app: worker
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: worker
+  template:
+    metadata:
+      labels:
+        app: worker
+    spec:
+      containers:
+      - name: worker
+        image: donaemeka/voting-app-worker:latest
+        env:                                # Environment variables for worker
+          - name: REDIS_HOST                # Worker needs Redis host
+            value: "redis"                  # Service name for Redis
+          - name: POSTGRES_HOST             # Worker needs Postgres host
+            value: "db"                     # Service name for Postgres
+          - name: POSTGRES_USER             # Get from Secret
+            valueFrom:
+              secretKeyRef:
+                name: db-credentials        # Secret object name
+                key: POSTGRES_USER          # Key inside the Secret
+          - name: POSTGRES_PASSWORD         # Get from Secret
+            valueFrom:
+              secretKeyRef:
+                name: db-credentials        # Secret object name
+                key: POSTGRES_PASSWORD      # Key inside the Secret

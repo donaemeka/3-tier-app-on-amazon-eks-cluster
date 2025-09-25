@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: db                     # Name of Deployment
+  labels:
+    app: db                    # Label for Postgres Pods
+spec:
+  replicas: 1                  # One Postgres Pod
+  selector:
+    matchLabels:
+      app: db                  # Matches Pods with "app=db"
+  template:
+    metadata:
+      labels:
+        app: db                # Pod label "app=db"
+    spec:
+      containers:
+      - name: db
+        image: postgres:9.4    # Lab image for Postgres
+        env:                   # Environment variables (database config)
+        - name: POSTGRES_USER
+          value: "postgres"    # Default user
+        - name: POSTGRES_PASSWORD
+          value: "postgres"    # Default password
+        - name: POSTGRES_DB
+          value: "postgres"    # Default database name
+        ports:
+        - containerPort: 5432  # Postgres listens on port 5432

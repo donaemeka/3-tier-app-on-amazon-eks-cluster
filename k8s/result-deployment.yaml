@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: result                 # Name of the Deployment
+  labels:
+    app: result                # Label for identification
+spec:
+  replicas: 2                  # Run 2 Pods
+  selector:
+    matchLabels:
+      app: result              # Deployment manages Pods with this label
+  template:
+    metadata:
+      labels:
+        app: result            # Pod label "app=result"
+    spec:
+      containers:
+      - name: result
+        image: donaemeka/voting-app-result:latest  # Lab image for result app
+        ports:
+        - containerPort: 80    # Node.js app listens on port 80

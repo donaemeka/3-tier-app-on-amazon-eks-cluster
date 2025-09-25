@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: result                 # Name of the Service
+spec:
+  type: NodePort               # Expose externally
+  selector:
+    app: result                # Connects to Pods labeled "app=result"
+  ports:
+    - port: 80                 # Service port inside cluster
+      targetPort: 80           # Forwards to container's port 80
+      nodePort: 30002          # External access via NodeIP:30002
