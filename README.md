@@ -1,6 +1,6 @@
 ## Voting App on Amazon EKS - DevOps Project
 
-This repository contains my DevOps project where I deployed a 3-tier web application (Vote app, Result app, Worker, Redis, PostgreSQL) on Amazon EKS (Elastic Kubernetes Service). The goal of this project is to showcase my skills as a junior DevOps engineer by applying industry practices: Infrastructure as Code, Docker, Kubernetes, CI/CD, and AWS. It reflects how I approach real-world DevOps challenges — step by step, learning by doing, and implementing best practices.
+This repository contains my DevOps project where I deployed a 3-tier web application (Vote app, Result app, Worker, Redis, PostgreSQL) on Amazon EKS (Elastic Kubernetes Service). The goal of this project is to showcase my skills as a junior DevOps engineer by applying industry practices: Infrastructure as Code, Docker, Kubernetes, CI/CD, and AWS. It reflects how I approach real-world DevOps challenges, step by step, learning by doing, and implementing best practices.
 
 ## 🎯 Project Objectives
 
@@ -21,25 +21,25 @@ This repository contains my DevOps project where I deployed a 3-tier web applica
 
 ## 🏗️ Architecture:
 
-**Frontend → NGINX Ingress → Amazon EKS → Microservices**
+### Frontend → NGINX Ingress → Amazon EKS → Microservices
 
 The application follows a 3-tier design:
 
 1. Frontend:
 
-       - **vote → Python Flask app (voting UI).**
+       ## - vote → Python Flask app (voting UI).
 
-       - **result → Node.js app (displays results).**
+       ## - result → Node.js app (displays results).
 
 2. Backend:
 
-       - **worker → .NET service that processes votes.**
+       ## - worker → .NET service that processes votes.
 
 3. Database Layer:
 
-       - **redis → stores votes temporarily (in-memory).**
+       ## - redis → stores votes temporarily (in-memory).
 
-       - **postgresql → stores results permanently.**
+       ## - postgresql → stores results permanently.
 
 **All components are containerized with Docker, deployed on Kubernetes, and routed externally using NGINX Ingress.**
 
@@ -64,8 +64,8 @@ The application follows a 3-tier design:
 Follow these steps to set up and run the project:
 
 1. Clone the Repository
-     - git clone https://github.com/donaemeka/3-tier-app-on-amazon-eks-cluster.git
-     - cd 3-tier-app-on-amazon-eks-cluster
+     - git clone   https://github.com/donaemeka/3-tier-app-on-amazon-eks-cluster.git
+     - cd          3-tier-app-on-amazon-eks-cluster
 
 2. Create EKS Cluster with eksctl
 
@@ -81,25 +81,22 @@ Follow these steps to set up and run the project:
 
 - Amazon EKS Cluster
 
-3. ## Verify the cluster:
+3.  Verify the cluster:    
     - kubectl get nodes
 
 
-4. Build & Push Docker Images
+4. Build & Push Docker Images:
+**Each microservice has a Dockerfile. Build and push them to Docker Hub:**
+   - docker build -t <dockerhub-username>/voting-app-vote ./vote
+   - docker push <dockerhub-username>/voting-app-vote
 
-Each microservice has a Dockerfile. Build and push them to Docker Hub:
-
-   -**docker build -t <dockerhub-username>/voting-app-vote ./vote**
-   - **docker push <dockerhub-username>/voting-app-vote**
-
-(Repeat for result, worker, etc.)
+        **(Repeat for result, worker, etc.)**
 
 
-5.  Deploy Kubernetes Manifests
-
-Inside the k8s/ folder:
-   - kubectl apply -f .
-   - kubectl get pods
+5. Deploy Kubernetes Manifests
+   Inside the k8s/ folder:
+      - kubectl apply -f .
+      - kubectl get pods
 
 
 5. Install NGINX Ingress Controller
@@ -110,9 +107,8 @@ Inside the k8s/ folder:
    Get the external IP of the ingress:
    - kubectl get ingress
 
-   Open Vote App → http://<EXTERNAL-IP>/vote
-
-   Open Result App → http://<EXTERNAL-IP>/result
+Open Vote App → http://<EXTERNAL-IP>/vote
+ Open Result App → http://<EXTERNAL-IP>/result
 
 
 
@@ -169,7 +165,7 @@ This screenshot shows the running pods, services, and ingress with the external 
 
     - Fix: Waited for pods to be Running before testing ingress.
 
-3. **itHub Actions workflow not triggering**
+3. **GitHub Actions workflow not triggering**
 
     - Cause: Workflow YAML was in wrong folder (.github/ci-cd-pipeline.yml).
 
