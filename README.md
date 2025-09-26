@@ -63,13 +63,13 @@ The application follows a 3-tier design:
 
 Follow these steps to set up and run the project:
 
-1. Clone the Repository
+1. ## Clone the Repository
      - git clone   https://github.com/donaemeka/3-tier-app-on-amazon-eks-cluster.git
      - cd          3-tier-app-on-amazon-eks-cluster
 
-2. Create EKS Cluster with eksctl
+2. ## Create EKS Cluster with eksctl
 
-**eksctl create cluster --name dona-eks --region us-east-1 --nodegroup-name worker-nodes --node-type t3.medium --nodes 2 --nodes-min 2 --nodes-max 4 --managed**
+eksctl create cluster --name dona-eks --region us-east-1 --nodegroup-name worker-nodes --node-type t3.medium --nodes 2 --nodes-min 2 --nodes-max 4 --managed
 
 ## This creates:
 
@@ -81,33 +81,34 @@ Follow these steps to set up and run the project:
 
 - Amazon EKS Cluster
 
-3.  Verify the cluster:    
+3.  ## Verify the cluster:    
     - kubectl get nodes
 
 
-4. Build & Push Docker Images:
-**Each microservice has a Dockerfile. Build and push them to Docker Hub:**
+4. ## Build & Push Docker Images:
+Each microservice has a Dockerfile. Build and push them to Docker Hub:
    - docker build -t <dockerhub-username>/voting-app-vote ./vote
    - docker push <dockerhub-username>/voting-app-vote
 
         **(Repeat for result, worker, etc.)**
 
 
-5. Deploy Kubernetes Manifests
+5. ## Deploy Kubernetes Manifests
    Inside the k8s/ folder:
       - kubectl apply -f .
       - kubectl get pods
 
 
-5. Install NGINX Ingress Controller
+5. ## Install NGINX Ingress Controller
    - kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/main/deploy/static/provider/aws/deploy.yaml
 
 
-6. Access the Application
+6. ## Access the Application
    Get the external IP of the ingress:
    - kubectl get ingress
 
 Open Vote App → http://<EXTERNAL-IP>/vote
+
  Open Result App → http://<EXTERNAL-IP>/result
 
 
