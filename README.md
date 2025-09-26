@@ -27,19 +27,19 @@ The application follows a 3-tier design:
 
 1. Frontend:
 
-       ## - vote → Python Flask app (voting UI).
+        - vote → Python Flask app (voting UI).
 
-       ## - result → Node.js app (displays results).
+        - result → Node.js app (displays results).
 
 2. Backend:
 
-       ## - worker → .NET service that processes votes.
+        - worker → .NET service that processes votes.
 
 3. Database Layer:
 
-       ## - redis → stores votes temporarily (in-memory).
+        - redis → stores votes temporarily (in-memory).
 
-       ## - postgresql → stores results permanently.
+        - postgresql → stores results permanently.
 
 **All components are containerized with Docker, deployed on Kubernetes, and routed externally using NGINX Ingress.**
 
@@ -67,7 +67,7 @@ Follow these steps to set up and run the project:
      - git clone   https://github.com/donaemeka/3-tier-app-on-amazon-eks-cluster.git
      - cd          3-tier-app-on-amazon-eks-cluster
 
-2. ## Create EKS Cluster with eksctl
+2. ## Create EKS Cluster with eksctl whith the command below:
 
 eksctl create cluster --name dona-eks --region us-east-1 --nodegroup-name worker-nodes --node-type t3.medium --nodes 2 --nodes-min 2 --nodes-max 4 --managed
 
@@ -107,9 +107,9 @@ Each microservice has a Dockerfile. Build and push them to Docker Hub:
    Get the external IP of the ingress:
    - kubectl get ingress
 
-Open Vote App → http://<EXTERNAL-IP>/vote
+Open Vote App → http://EXTERNAL-IP/vote
 
- Open Result App → http://<EXTERNAL-IP>/result
+ Open Result App → http://EXTERNAL-IP/result
 
 
 
