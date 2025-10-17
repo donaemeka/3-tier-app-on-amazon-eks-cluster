@@ -64,8 +64,8 @@ The application follows a 3-tier design:
 Follow these steps to set up and run the project:
 
 1. ## Clone the Repository
-     - git clone   https://github.com/donaemeka/3-tier-app-on-amazon-eks-cluster.git
-     - cd          3-tier-app-on-amazon-eks-cluster
+    - git clone https://github.com/donaemeka/Real-Time-Voting-Application-on-AWS-EKS.git
+    - cd Real-Time-Voting-Application-on-AWS-EKS
 
 2. ## Create EKS Cluster with eksctl whith the command below:
 
