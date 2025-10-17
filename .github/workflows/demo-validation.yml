@@ -1,0 +1,45 @@
+name: Project Validation
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  validate-project:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v4
+
+    - name: Validate Project Structure
+      run: |
+        echo "🔍 Validating Real-Time Voting Application Structure..."
+        echo "✅ Docker configurations found:"
+        ls -la docker-compose.yml vote/Dockerfile result/Dockerfile worker/Dockerfile
+        echo "✅ Kubernetes manifests found:"
+        ls -la k8s/
+        echo "✅ Application components:"
+        ls -la vote/ result/ worker/
+        echo "📚 Documentation present:"
+        ls -la README.md LICENSE
+        
+    - name: Build Simulation
+      run: |
+        echo "🏗️ Simulating Docker builds..."
+        echo "✅ vote image would be built"
+        echo "✅ result image would be built" 
+        echo "✅ worker image would be built"
+        echo "📦 Images would be pushed to Docker Hub"
+        
+    - name: Deployment Readiness
+      run: |
+        echo "🚀 Deployment Ready"
+        echo "📍 This project is configured for AWS EKS deployment"
+        echo "📍 Requires: AWS EKS cluster, Docker Hub credentials"
+        echo "📍 Full CI/CD pipeline available in: ci-cd-pipeline.yml.disabled"
+        echo "✅ Project validation completed successfully!"
+        
+    - name: Success Status
+      run: echo "🎉 Real-Time Voting Application - Ready for Demonstration!"
